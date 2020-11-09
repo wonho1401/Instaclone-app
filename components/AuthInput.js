@@ -9,7 +9,7 @@ const Container = styled.View`
 const TextInput = styled.TextInput`
   background-color: ${(props) => props.theme.greyColor};
   padding: 10px;
-  width: ${constants.width / 2};
+  width: ${constants.width / 1.5};
   border: 2px solid ${(props) => props.theme.lightGreyColor};
   border-radius: 4px;
 `;
@@ -20,6 +20,9 @@ const AuthInput = ({
   keyboardType = "default",
   autoCapitalize = "none",
   onChange,
+  returnKeyType = "done",
+  onSubmitEditing = () => null,
+  autoCorrect = true,
 }) => (
   <Container>
     <TextInput
@@ -28,6 +31,9 @@ const AuthInput = ({
       keyboardType={keyboardType}
       autoCapitalize={autoCapitalize}
       onChangeText={onChange}
+      returnKeyType={returnKeyType}
+      onSubmitEditing={onSubmitEditing}
+      autoCorrect={autoCorrect}
     />
   </Container>
 );
@@ -45,6 +51,9 @@ AuthInput.propTypes = {
   ]),
   autoCapitalize: PropTypes.oneOf(["none", "sentences", "words", "characters"]),
   onChange: PropTypes.func.isRequired,
+  returnKeyType: PropTypes.oneOf(["done", "go", "next", "search", "send"]),
+  onSubmitEditing: PropTypes.func,
+  autoCorrect: PropTypes.bool,
 };
 
 export default AuthInput;
