@@ -38,6 +38,12 @@ export default function App() {
 
       const client = new ApolloClient({
         cache,
+        request: async (operation) => {
+          const token = await AsyncStorage.getItem("token");
+          return operation.setContext({
+            headers: { Authorization: `Bearer ${token}` },
+          });
+        },
         ...apolloClientOptions,
       });
       //클라이언트 생성
