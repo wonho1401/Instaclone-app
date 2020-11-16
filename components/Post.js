@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { gql } from "apollo-boost";
 import Swiper from "react-native-swiper";
 import constants from "../constants";
+import styles from "../styles";
+import { useMutation } from "react-apollo-hooks";
+
+export const TOGGLE_LIKE = gql`
+  mutation toggleLike($postId: String!) {
+    toggleLike(postId: $postId)
+  }
+`;
 
 const Container = styled.View``;
 const Header = styled.View`
@@ -52,7 +61,36 @@ const CommentCount = styled.Text`
   opacity: 0.5;
 `;
 
-const Post = ({ user, location, files = [], likeCount, caption, comments }) => {
+const Post = ({
+  id,
+  user,
+  location,
+  files = [],
+  likeCount: likeCountProp,
+  caption,
+  comments = [],
+  isLiked: isLikedProp,
+}) => {
+  const [isLiked, setisLiked] = useState(isLikedProp);
+  const [likeCount, setlikeCount] = useState(likeCountProp);
+  const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
+    variables: { postId: id },
+  });
+
+  const handleLike = async () => {
+    if (isLiked === true) {
+      setlikeCount((l) => l - 1);
+    } else {
+      setlikeCount((l) => l + 1);
+    }
+    setisLiked((p) => !p);
+    try {
+      await toggleLikeMutation();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container>
       <Header>
@@ -83,14 +121,22 @@ const Post = ({ user, location, files = [], likeCount, caption, comments }) => {
       <InfoContainer>
         {/* Icons */}
         <IconsContainer>
-          <Touchable>
+          <Touchable onPress={handleLike}>
             <IconContainer>
-              <Ionicons size={28} name={"ios-heart-empty"} />
+              <Ionicons
+                color={isLiked ? styles.redColor : styles.blackColor}
+                size={28}
+                name={isLiked ? "ios-heart" : "ios-heart-empty"}
+              />
             </IconContainer>
           </Touchable>
           <Touchable>
             <IconContainer>
-              <Ionicons size={28} name={"ios-heart-empty"} />
+              <Ionicons
+                color={styles.blackColor}
+                size={28}
+                name={"ios-heart-empty"}
+              />
             </IconContainer>
           </Touchable>
           <Touchable>
