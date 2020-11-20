@@ -5,34 +5,38 @@ import Loader from "../../components/Loader";
 import { useQuery } from "react-apollo-hooks";
 import { RefreshControl, ScrollView } from "react-native";
 import Post from "../../components/Post";
+import { POST_FRAGMENT } from "../../fragment";
 const FEED_QUERY = gql`
   {
     seeFeed {
-      id
-      location
-      caption
-      user {
-        id
-        avatar
-        nickname
-      }
-      files {
-        id
-        url
-      }
-      likeCount
-      isLiked
-      comments {
-        id
-        text
-        user {
-          id
-          nickname
-        }
-      }
-      createdAt
+      #   id
+      #   location
+      #   caption
+      #   user {
+      #     id
+      #     avatar
+      #     nickname
+      #   }
+      #   files {
+      #     id
+      #     url
+      #   }
+      #   likeCount
+      #   isLiked
+      #   comments {
+      #     id
+      #     text
+      #     user {
+      #       id
+      #       nickname
+      #     }
+      #   }
+      #   createdAt
+      # }
+      ...PostParts
     }
   }
+  ${POST_FRAGMENT}
 `;
 
 const View = styled.View`

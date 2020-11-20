@@ -8,16 +8,33 @@ import Search from "../screens/Tabs/Search/SearchContainer";
 import { createStackNavigator } from "react-navigation-stack";
 import MessagesLink from "../components/MessagesLink";
 import NavIcon from "../components/NavIcon";
+import Detail from "../screens/Detail";
+import styles from "../styles";
 
 const stackFactory = (initialRoute, customConfig) =>
-  createStackNavigator({
-    InitialRoute: {
-      screen: initialRoute,
-      navigationOptions: {
-        ...customConfig,
+  createStackNavigator(
+    {
+      InitialRoute: {
+        screen: initialRoute,
+        navigationOptions: {
+          ...customConfig,
+        },
+      },
+      Detail: {
+        screen: Detail,
+        navigationOptions: {
+          headerTintColor: styles.blackColor,
+          headerBackTitle: null,
+          title: "Photo",
+        },
       },
     },
-  });
+    {
+      defaultNavigationOptions: {
+        headerStyle: {},
+      },
+    }
+  );
 
 export default createBottomTabNavigator(
   {
@@ -39,7 +56,9 @@ export default createBottomTabNavigator(
       },
     },
     Search: {
-      screen: stackFactory(Search),
+      screen: stackFactory(Search, {
+        headerBackTitle: null,
+      }),
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
           <NavIcon focused={focused} name={"ios-search"} />
