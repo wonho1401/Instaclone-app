@@ -10,6 +10,7 @@ import MessagesLink from "../components/MessagesLink";
 import NavIcon from "../components/NavIcon";
 import Detail from "../screens/Detail";
 import styles from "../styles";
+import UserDetail from "../screens/UserDetail";
 
 const stackFactory = (initialRoute, customConfig) =>
   createStackNavigator(
@@ -28,10 +29,18 @@ const stackFactory = (initialRoute, customConfig) =>
           title: "Photo",
         },
       },
+      UserDetail: {
+        screen: UserDetail,
+        navigationOptions: {
+          title: "User",
+        },
+      },
     },
     {
       defaultNavigationOptions: {
         headerStyle: {},
+        headerTintColor: styles.blackColor,
+        headerBackTitle: null,
       },
     }
   );
@@ -100,7 +109,7 @@ export default createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: "Search",
+    initialRouteName: "Profile",
     tabBarOptions: {
       showLabel: false,
       style: {

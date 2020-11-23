@@ -1,6 +1,7 @@
 import { gql } from "apollo-boost";
 import React from "react";
 import { useQuery } from "react-apollo-hooks";
+import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components";
 import Loader from "../components/Loader";
 import Post from "../components/Post";
@@ -23,12 +24,12 @@ export default ({ navigation }) => {
     variables: { id: navigation.getParam("id") },
   });
   return (
-    <View>
+    <ScrollView>
       {loading ? (
         <Loader />
       ) : (
         data && data.seeFullPost && <Post {...data.seeFullPost} />
       )}
-    </View>
+    </ScrollView>
   );
 };
