@@ -1,8 +1,100 @@
 import React from "react";
+import { Image, View, TouchableOpacity } from "react-native";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { Ionicons, Feather } from "@expo/vector-icons";
+import constants from "../constants";
+import styles from "../styles";
 
-const UserProfile = () => null;
+const ProfileHeader = styled.View`
+  padding: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+const HeaderColumn = styled.View``;
+
+const ProfileStats = styled.View`
+  flex-direction: row;
+`;
+const Stat = styled.View`
+  margin-left: 40px;
+  align-items: center;
+`;
+const Bold = styled.Text`
+  font-weight: 600;
+`;
+const StatName = styled.Text`
+  font-size: 12px;
+  font-weight: 500;
+`;
+
+const ProfileMeta = styled.View`
+  margin-top: 10px;
+  padding-horizontal: 10px;
+`;
+
+const Bio = styled.Text``;
+
+const ButtonContainer = styled.View`
+  margin-top:30px
+  flex-direction: row;
+  border:1px solid ${styles.lightGreyColor}
+`;
+const Button = styled.View`
+  width: ${constants.width / 2};
+  align-items: center;
+`;
+
+const UserProfile = ({
+  avatar,
+  postCount,
+  followersCount,
+  followingCount,
+  fullName,
+  bio,
+}) => (
+  <View>
+    <ProfileHeader>
+      <Image
+        style={{ height: 80, width: 80, borderRadius: 40 }}
+        source={{ uri: avatar }}
+      />
+      <HeaderColumn>
+        <ProfileStats>
+          <Stat>
+            <Bold>{postCount}</Bold>
+            <StatName>Posts</StatName>
+          </Stat>
+          <Stat>
+            <Bold>{followersCount}</Bold>
+            <StatName>Followers</StatName>
+          </Stat>
+          <Stat>
+            <Bold>{followingCount}</Bold>
+            <StatName>Following</StatName>
+          </Stat>
+        </ProfileStats>
+      </HeaderColumn>
+    </ProfileHeader>
+    <ProfileMeta>
+      <Bold>{fullName}</Bold>
+      <Bio>{bio}</Bio>
+    </ProfileMeta>
+    <ButtonContainer>
+      <TouchableOpacity>
+        <Button>
+          <Feather size={36} name={"grid"} />
+        </Button>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Button>
+          <Feather size={36} name={"list"} />
+        </Button>
+      </TouchableOpacity>
+    </ButtonContainer>
+  </View>
+);
 
 UserProfile.propTypes = {
   id: PropTypes.string.isRequired,
@@ -14,7 +106,7 @@ UserProfile.propTypes = {
   bio: PropTypes.string.isRequired,
   followingCount: PropTypes.number.isRequired,
   followersCount: PropTypes.number.isRequired,
-  postsCount: PropTypes.number.isRequired,
+  postCount: PropTypes.number.isRequired,
   post: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
