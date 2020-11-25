@@ -101,11 +101,12 @@ export default createBottomTabNavigator(
       screen: stackFactory(Profile, {
         title: "Profile",
       }),
-      navigationOptions: {
+      navigationOptions: ({ navigation }) => ({
         tabBarIcon: ({ focused }) => (
           <NavIcon focused={focused} name={"ios-contact"} size={30} />
         ),
-      },
+        title: navigation.getParam("nickname"),
+      }),
     },
   },
   {
