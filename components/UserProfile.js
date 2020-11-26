@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, View, TouchableOpacity } from "react-native";
+import { Image, View, TouchableOpacity, ScrollView } from "react-native";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Ionicons, Feather } from "@expo/vector-icons";
@@ -110,14 +110,16 @@ const UserProfile = ({
           </Button>
         </TouchableOpacity>
       </ButtonContainer>
-      {post &&
-        post.map((p) =>
-          isGrid ? (
-            <SquarePhoto key={p.id} {...p} />
-          ) : (
-            <Post key={p.id} {...p} />
-          )
-        )}
+      <ScrollView contentContainerStyle={{ flexDirection: "row" }}>
+        {post &&
+          post.map((p) =>
+            isGrid ? (
+              <SquarePhoto key={p.id} {...p} />
+            ) : (
+              <Post key={p.id} {...p} />
+            )
+          )}
+      </ScrollView>
     </View>
   );
 };

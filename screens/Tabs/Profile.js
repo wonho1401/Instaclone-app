@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { gql } from "apollo-boost";
 import { USER_FRAGMENT } from "../../fragment";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView } from "react-native";
 import Loader from "../../components/Loader";
 import { useQuery } from "react-apollo-hooks";
 import UserProfile from "../../components/UserProfile";
