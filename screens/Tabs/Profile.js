@@ -15,7 +15,6 @@ export const ME = gql`
   }
   ${USER_FRAGMENT}
 `;
-
 export default () => {
   const { loading, data } = useQuery(ME);
 

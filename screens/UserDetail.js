@@ -8,7 +8,7 @@ import { USER_FRAGMENT } from "../fragment";
 
 const GET_USER = gql`
   query seeUser($nickname: String!) {
-    seeUser(nickname: $nickanme) {
+    seeUser(nickname: $nickname) {
       ...UserParts
     }
   }
