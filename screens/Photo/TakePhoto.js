@@ -16,7 +16,7 @@ const View = styled.View`
   align-items: center;
 `;
 
-const Text = styled.Text``;
+const Icon = styled.View``;
 
 const Button = styled.View`
   width: 100px;
@@ -39,6 +39,7 @@ export default ({ navigation }) => {
       });
       const { assets } = await MediaLibrary.createAssetAsync(uri);
       console.log(assets);
+      navigation.navigate("Upload", { photo: asset });
     } catch (e) {
       console.log(e);
       setCanTakePhoto(true);

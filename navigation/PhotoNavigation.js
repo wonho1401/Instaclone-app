@@ -9,16 +9,16 @@ import styles from "../styles";
 //굳이 MaterialTopTab을 사용하는 이유? 슬라이드가 가능하기때문. BottomTab은 슬라이드가 안됨!
 const PhotoTabs = createMaterialTopTabNavigator(
   {
-    Take: {
-      screen: TakePhoto,
-      navigationOptions: {
-        tabBarLabel: "Take",
-      },
-    },
     Select: {
       screen: SelectPhoto,
       navigationOptions: {
         tabBarLabel: "Select",
+      },
+    },
+    Take: {
+      screen: TakePhoto,
+      navigationOptions: {
+        tabBarLabel: "Take",
       },
     },
   },
@@ -51,7 +51,19 @@ export default createStackNavigator(
         headerBackImage: null,
       },
     },
-    UploadPhoto,
+    Upload: {
+      screen: UploadPhoto,
+      navigationOptions: {
+        title: "Upload",
+      },
+    },
   },
-  { defaultNavigationOptions: { headerStyle: { ...stackStyle } } }
+  {
+    defaultNavigationOptions: {
+      headerStyle: { ...stackStyle },
+      headerTintColor: styles.blackColor,
+      headerBackTitleVisible: null,
+      // headerBackImage: null,
+    },
+  }
 );
