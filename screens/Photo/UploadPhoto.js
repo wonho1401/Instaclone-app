@@ -7,6 +7,7 @@ import styles from "../../styles";
 import useInput from "../../hooks/useInput";
 import AuthButton from "../../components/AuthButton";
 
+
 const Container = styled.View`
   padding: 20px;
   flex-direction: row;
@@ -60,13 +61,15 @@ export default ({ navigation }) => {
     });
     try {
       const {
-        data: { path },
+        data: { location },
       } = await axios.post("http://localhost:4000/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },
       });
-      setFileUrl(path);
+      console.log(location);
+      setFileUrl(location);
+      //백엔드에 올리는 과정(?) axios를 이용하여 요청,응답 데이터를 변환해줌.
     } catch (e) {
       Alert.alert("Can't upload", "Try later");
     }
