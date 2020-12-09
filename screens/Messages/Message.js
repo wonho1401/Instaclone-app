@@ -15,3 +15,5 @@ export default () => (
     <Text>Message</Text>
   </View>
 );
+
+//message part 듣고 적용해보기.

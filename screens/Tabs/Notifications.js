@@ -10,6 +10,8 @@ const View = styled.View`
 
 const Text = styled.Text``;
 
+//how? 이번주내로 해보자.
+
 export default () => (
   <View>
     <Text>Notifications</Text>
